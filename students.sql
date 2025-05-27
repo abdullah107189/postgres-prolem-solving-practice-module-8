@@ -21,7 +21,7 @@ ALTER TABLE students
 
 SELECT * FROM students;
 INSERT INTO students (roll, s_name, age, department, score, academic_result, last_login) VALUES
-(123, 'Tina Phillips', 27, 'Chemistry', NULL, 'Good', '2025-05-09');
+(127, 'Tina Phillips', 27, 'Chemistry', 45, 'Good', '2024-05-09');
 
 
 (101, 'Alice Smith', 20, 'Computer Science', 85, 'Excellent', '2025-05-20'),
@@ -116,3 +116,18 @@ SELECT department, avg(score) FROM students
 -- 13. maximum and minimum age
 SELECT max(age) FROM students;
 SELECT min(age) as "Small age" FROM students;
+
+-------------------------------------------------
+-- 14. Update the status of students who scored less than 50 to 'failed'.
+UPDATE students
+SET academic_result = 'Failed'
+WHERE score < 50;
+
+-- 15. Delete students who have not logged in since last year.
+DELETE FROM students
+WHERE last_login <= NOW() - INTERVAL '1 year';
+-- WHERE last_login <= NOW() - INTERVAL '10 day';
+-- WHERE last_login <= NOW() - INTERVAL '1 month';
+
+-- 16. se LIMIT and OFFSET to fetch the second page of results (5 per page).
+SELECT * FROM students LIMIT(5) OFFSET(5*0)
