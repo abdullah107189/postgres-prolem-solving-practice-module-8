@@ -12,6 +12,40 @@ CREATE TABLE students (
     academic_result VARCHAR(20),
     last_login DATE
 );
+-- rename id to s_id for better know id
+ALTER TABLE students
+    RENAME id to s_id;
+-- change VARCHAR(20) to VARCHAR(50)
+ALTER TABLE students
+    alter column department TYPE VARCHAR(50)
+
+SELECT * FROM students;
+INSERT INTO students (roll, s_name, age, department, score, academic_result, last_login) VALUES
+(123, 'Tina Phillips', 27, 'Chemistry', NULL, 'Good', '2025-05-09');
+
+
+(101, 'Alice Smith', 20, 'Computer Science', 85, 'Excellent', '2025-05-20'),
+(102, 'Bob Johnson', 21, 'Electrical Engineering', 78, 'Good', '2025-05-19'),
+(103, 'Charlie Brown', 19, 'Mathematics', 92, 'Excellent', '2025-05-21'),
+(104, 'Diana Miller', 20, 'Physics', 70, 'Average', '2025-05-18'),
+(105, 'Eve Davis', 22, 'Chemistry', 88, 'Excellent', '2025-05-22'),
+(106, 'Frank White', 21, 'Computer Science', 75, 'Good', '2025-05-17'),
+(107, 'Grace Taylor', 19, 'Electrical Engineering', 65, 'Pass', '2025-05-20'),
+(108, 'Henry Wilson', 20, 'Mathematics', 80, 'Good', '2025-05-16'),
+(109, 'Ivy Moore', 22, 'Physics', 95, 'Excellent', '2025-05-23'),
+(110, 'Jack Green', 20, 'Chemistry', 72, 'Average', '2025-05-15'),
+(111, 'Karen Hall', 21, 'Computer Science', 90, 'Excellent', '2025-05-24'),
+(112, 'Liam King', 19, 'Electrical Engineering', 68, 'Pass', '2025-05-14'),
+(113, 'Mia Wright', 20, 'Mathematics', 83, 'Good', '2025-05-25'),
+(114, 'Noah Turner', 22, 'Physics', 79, 'Good', '2025-05-13'),
+(115, 'Olivia Scott', 20, 'Chemistry', 86, 'Excellent', '2025-05-26'),
+(116, 'Peter Adams', 21, 'Computer Science', 71, 'Average', '2025-05-12'),
+(117, 'Quinn Baker', 19, 'Electrical Engineering', 91, 'Excellent', '2025-05-27'),
+(118, 'Rachel Carter', 20, 'Mathematics', 60, 'Fail', '2025-05-11'),
+(119, 'Sam Roberts', 22, 'Physics', 84, 'Good', '2025-05-10'),
+(120, 'Tina Phillips', 20, 'Chemistry', 77, 'Good', '2025-05-09');
+
+INSERT INTO student
 -- 1. add to column
 ALTER TABLE students
     ADD COLUMN email VARCHAR(50);
@@ -24,6 +58,9 @@ ALTER TABLE students
 -- 3. set constraint and unique 
 ALTER TABLE students
    ADD CONSTRAINT unique_email UNIQUE(student_email)
+
+ALTER TABLE students
+   ALTER COLUMN student_email set DEFAULT 'n/a';
 
 -- creating new table for set primary key 
 CREATE Table courses(
@@ -40,5 +77,31 @@ INSERT INTO courses (c_name, c_instructor) VALUES('math', 'mofijul');
 -- 5. drop courses c_name column 
 ALTER TABLE courses
     DROP COLUMN c_name;
-    
+
 SELECT * FROM courses;
+
+
+
+ -----------------------------------------------------
+-- 6. show score greater then 80 and not NULL;
+ SELECT score FROM students
+    WHERE (score >= 80) OR (score IS NOT NULL);
+
+-- 7. use not operation 
+SELECT * FROM students
+    WHERE NOT department ='Physics';
+
+-- 8. Fetch students whose names start with ‘A’ using LIKE and ILIKE.
+SELECT * FROM students
+    WHERE s_name LIKE 'a%';
+
+-- **** i ILIKE is the best search because this is find any text like smaller , bigger any thing **
+SELECT * FROM students
+    WHERE s_name ILIKE 'a%'
+
+-- 9. Select all students whose age is between 18 and 25.
+SELECT * from students WHERE age BETWEEN 18 AND 25;
+
+-- 10. Retrieve rows using IN for a specific set of roll numbers.
+SELECT * FROM students WHERE roll IN(102, 105, 120);
+
