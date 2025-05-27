@@ -105,3 +105,14 @@ SELECT * from students WHERE age BETWEEN 18 AND 25;
 -- 10. Retrieve rows using IN for a specific set of roll numbers.
 SELECT * FROM students WHERE roll IN(102, 105, 120);
 
+----------------------------------------------------------------
+-- 11. count student
+SELECT count(*) FROM students;
+
+-- 12. specific department of average score
+SELECT department, avg(score) FROM students
+    GROUP BY department
+
+-- 13. maximum and minimum age
+SELECT max(age) FROM students;
+SELECT min(age) as "Small age" FROM students;
